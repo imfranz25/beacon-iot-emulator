@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+console.log("Starting AWS IoT Device SDK...");
 const device = AWSIoTData.device({
   region: process.env.IOT_REGION,
   protocol: "wss",
@@ -30,6 +31,7 @@ function subscribeToTopic(topic) {
 const init = async () => {
   try {
     const serialNumbers = process.env.SERIAL_NUMBERS?.split(",");
+    console.log("Serial Numbers:", serialNumbers);
 
     for (const serialNumber of serialNumbers) {
       subscribeToTopic(`${serialNumber}/command/sub`);
